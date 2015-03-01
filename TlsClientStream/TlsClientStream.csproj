@@ -58,6 +58,8 @@
     <Compile Include="GaloisCounterMode.cs" />
     <Compile Include="HandshakeMessagesBuffer.cs" />
     <Compile Include="HandshakeData.cs" />
+    <Compile Include="MD5SHA1.cs" />
+    <Compile Include="RsaPKCS1.cs" />
     <Compile Include="ServerAlertException.cs" />
     <Compile Include="TlsClientStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
