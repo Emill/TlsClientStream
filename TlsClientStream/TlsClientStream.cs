@@ -948,10 +948,10 @@ namespace TlsClientStream
                     SendAlertFatal(AlertDescription.CertificateExpired);
                 else if (_handshakeData.CertChain.ChainStatus.Any(s => (s.Status & X509ChainStatusFlags.Revoked) != 0))
                     SendAlertFatal(AlertDescription.CertificateRevoked);
-                else if (!_handshakeData.CertChain.ChainStatus.All(s => (s.Status & ~X509ChainStatusFlags.RevocationStatusUnknown) == 0))
+                else if (_remoteCertificationValidationCallback != null || !_handshakeData.CertChain.ChainStatus.All(s => (s.Status & ~X509ChainStatusFlags.RevocationStatusUnknown) == 0))
                 {
                     //throw new Exception(string.Join(", ", _handshakeData.CertChain.ChainStatus.Select(s => s.StatusInformation)));
-                    SendAlertFatal(AlertDescription.CertificateUnknown);
+                    SendAlertFatal(AlertDescription.CertificateUnknown, "Server certificate was not accepted");
                 }
             }
         }
